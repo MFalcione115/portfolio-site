@@ -6,12 +6,12 @@ author: Michael
 
 # Update this once the repo is created, e.g. https://<username>.github.io
 url: ""
-baseurl: "/portfolio-site"
+baseurl: ""
 
 # Contact / social — fill these in
 email: "michael.falcione@outlook.com"
-linkedin: "https://linkedin.com/in/yourhandle"
-youtube: "https://www.youtube.com/@FalchCreate"
+linkedin: "https://www.linkedin.com/in/michaelfalcione"
+youtube: "https://www.youtube.com/@FalchCreate/videos"
 instagram: "https://www.instagram.com/falchcreate/"
 
 markdown: kramdown
