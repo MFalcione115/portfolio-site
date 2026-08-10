@@ -54,4 +54,28 @@
   if (reduceMotion) {
     playhead.style.transition = 'none';
   }
+
+  var track2Toggle = document.getElementById('track2Toggle');
+  var track2Panel = document.getElementById('track2Panel');
+  if (track2Toggle && track2Panel) {
+    track2Toggle.addEventListener('click', function () {
+      var isOpen = track2Panel.classList.toggle('is-open');
+      track2Toggle.classList.toggle('is-open', isOpen);
+      track2Toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  }
+
+  var track2Track = document.getElementById('track2Track');
+  var track2Playhead = document.getElementById('track2Playhead');
+  if (track2Track && track2Playhead) {
+    track2Track.addEventListener('mousemove', function (e) {
+      var rect = track2Track.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      track2Playhead.style.left = x + 'px';
+      track2Playhead.classList.add('is-visible');
+    });
+    track2Track.addEventListener('mouseleave', function () {
+      track2Playhead.classList.remove('is-visible');
+    });
+  }
 })();

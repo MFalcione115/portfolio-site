@@ -16,7 +16,8 @@
   <nav class="timeline-nav" aria-label="Site sections">
     <div class="timeline-nav__inner">
       <a href="{{ '/' | relative_url }}" class="timeline-nav__brand">
-        <strong>M.</strong>EDIT
+        <span class="timeline-nav__brand-line timeline-nav__brand-line--accent">Michael</span>
+        <span class="timeline-nav__brand-line timeline-nav__brand-line--base">Falcione</span>
       </a>
       <div class="timeline-track" id="timelineTrack">
         <a href="#reel" class="timeline-clip" data-target="reel">
@@ -36,8 +37,23 @@
         </a>
         <div class="timeline-playhead" id="timelinePlayhead"></div>
       </div>
+      <button class="track2-toggle" id="track2Toggle" type="button" aria-expanded="false" aria-controls="track2Panel" aria-label="Show more creative work">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
     </div>
   </nav>
+
+  <div class="track2-panel" id="track2Panel">
+    <div class="track2-panel__inner">
+      <span class="track2-panel__label">Track 02</span>
+      <div class="track2-track" id="track2Track">
+        <a href="{{ '/graphic-design/' | relative_url }}" class="timeline-clip">Graphic Design</a>
+        <a href="{{ '/motion-design/' | relative_url }}" class="timeline-clip">Motion Design</a>
+        <a href="{{ '/photography/' | relative_url }}" class="timeline-clip">Photography</a>
+        <div class="track2-playhead" id="track2Playhead"></div>
+      </div>
+    </div>
+  </div>
 
   <main>
     {{ content }}
