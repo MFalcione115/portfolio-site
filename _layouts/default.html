@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title | default: site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  {% seo %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+</head>
+<body>
+
+  <nav class="timeline-nav" aria-label="Site sections">
+    <div class="timeline-nav__inner">
+      <a href="{{ '/' | relative_url }}" class="timeline-nav__brand">
+        <strong>M.</strong>EDIT
+      </a>
+      <div class="timeline-track" id="timelineTrack">
+        <a href="#reel" class="timeline-clip" data-target="reel">
+          <span class="tc-label">Reel</span>
+        </a>
+        <a href="#work" class="timeline-clip" data-target="work">
+          <span class="tc-label">Work</span>
+        </a>
+        <a href="#skills" class="timeline-clip" data-target="skills">
+          <span class="tc-label">Skills</span>
+        </a>
+        <a href="#about" class="timeline-clip" data-target="about">
+          <span class="tc-label">About</span>
+        </a>
+        <a href="#contact" class="timeline-clip" data-target="contact">
+          <span class="tc-label">Contact</span>
+        </a>
+        <div class="timeline-playhead" id="timelinePlayhead"></div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    {{ content }}
+  </main>
+
+  <footer>
+    <p class="tc">&copy; {{ 'now' | date: "%Y" }} {{ site.author }} — cut on {{ 'now' | date: "%m.%d.%y" }}</p>
+  </footer>
+
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>
