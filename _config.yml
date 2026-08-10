@@ -9,10 +9,10 @@ url: ""
 baseurl: "/portfolio-site"
 
 # Contact / social — fill these in
-email: "you@example.com"
+email: "michael.falcione@outlook.com"
 linkedin: "https://linkedin.com/in/yourhandle"
-vimeo: "https://vimeo.com/yourhandle"
-instagram: ""
+youtube: "https://www.youtube.com/@FalchCreate"
+instagram: "https://www.instagram.com/falchcreate/"
 
 markdown: kramdown
 sass:
