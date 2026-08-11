@@ -626,3 +626,40 @@ footer .tc { color: var(--line); }
   overflow: hidden;
   max-width: 960px;
 }
+
+/* GALLERY — masonry-style grid for image sets with mixed aspect ratios */
+.gallery-grid {
+  column-count: 3;
+  column-gap: 24px;
+}
+
+@media (max-width: 860px) {
+  .gallery-grid { column-count: 2; }
+}
+
+@media (max-width: 560px) {
+  .gallery-grid { column-count: 1; }
+}
+
+.gallery-item {
+  display: block;
+  break-inside: avoid;
+  margin-bottom: 24px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--surface);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.gallery-item:hover {
+  border-color: var(--amber);
+  transform: translateY(-2px);
+}
+
+.gallery-item img,
+.gallery-item video {
+  width: 100%;
+  height: auto;
+  display: block;
+}

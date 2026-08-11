@@ -6,7 +6,7 @@ author: Michael
 
 # Update this once the repo is created, e.g. https://<username>.github.io
 url: ""
-baseurl: ""
+baseurl: "/portfolio-site"
 
 # Contact / social — fill these in
 email: "michael.falcione@outlook.com"
