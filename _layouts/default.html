@@ -13,6 +13,8 @@
 </head>
 <body>
 
+  <div class="render-bar" id="renderBar"></div>
+
   <nav class="timeline-nav" aria-label="Site sections">
     <div class="timeline-nav__inner">
       <a href="{{ '/' | relative_url }}" class="timeline-nav__brand">
@@ -63,6 +65,11 @@
     <p class="tc">&copy; {{ 'now' | date: "%Y" }} {{ site.author }} — cut on {{ 'now' | date: "%m.%d.%y" }}</p>
   </footer>
 
-  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/main.js' | relative_url }}"defer></script>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox__close" id="lightboxClose" aria-label="Close">&times;</button>
+    <div class="lightbox__content" id="lightboxContent"></div>
+  </div>
 </body>
 </html>

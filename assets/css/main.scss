@@ -184,6 +184,19 @@ h1, h2, h3 {
   .timeline-clip span.tc-label { display: none; }
 }
 
+/* RENDER BAR — scroll progress styled like an export/render bar */
+.render-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--amber);
+  box-shadow: 0 0 6px var(--amber);
+  z-index: 200;
+  transition: width 0.1s linear;
+}
+
 /* TRACK 2 — toggle arrow + expandable secondary nav panel */
 .track2-toggle {
   width: 32px;
@@ -192,21 +205,27 @@ h1, h2, h3 {
   align-items: center;
   justify-content: center;
   margin-left: 12px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--amber);
   border-radius: 3px;
   background: var(--surface);
-  color: var(--text-muted);
+  color: var(--amber);
   cursor: pointer;
-  transition: border-color 0.15s ease, color 0.15s ease, transform 0.2s ease;
+  transition: border-color 0.15s ease, color 0.15s ease, transform 0.2s ease, box-shadow 0.15s ease;
   flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(232, 163, 61, 0.35);
 }
 
-.track2-toggle:hover { border-color: var(--amber); color: var(--amber); }
+.track2-toggle:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+  box-shadow: 0 0 6px rgba(79, 184, 174, 0.35);
+}
 
 .track2-toggle.is-open {
   transform: rotate(180deg);
   color: var(--teal);
   border-color: var(--teal);
+  box-shadow: 0 0 6px rgba(79, 184, 174, 0.35);
 }
 
 .track2-toggle svg { width: 14px; height: 14px; }
@@ -409,8 +428,28 @@ h1, h2, h3 {
 ------------------------------------------------------------ */
 section {
   padding: 100px 0;
-  border-bottom: 1px solid var(--line);
+  border-bottom: none;
+  position: relative;
   scroll-margin-top: var(--nav-h);
+}
+
+section::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='16'%3E%3Crect x='0' y='2' width='2' height='14' fill='%234fb8ae' fill-opacity='0.4'/%3E%3Crect x='4' y='8' width='2' height='8' fill='%234fb8ae' fill-opacity='0.4'/%3E%3Crect x='8' y='10' width='2' height='6' fill='%234fb8ae' fill-opacity='0.4'/%3E%3Crect x='12' y='12' width='2' height='4' fill='%234fb8ae' fill-opacity='0.4'/%3E%3Crect x='16' y='10' width='2' height='6' fill='%234fb8ae' fill-opacity='0.4'/%3E%3Crect x='20' y='10' width='2' height='6' fill='%234fb8ae' fill-opacity='0.4'/%3E%3Crect x='24' y='2' width='2' height='14' fill='%234fb8ae' fill-opacity='0.4'/%3E%3Crect x='28' y='12' width='2' height='4' fill='%234fb8ae' fill-opacity='0.4'/%3E%3Crect x='32' y='6' width='2' height='10' fill='%234fb8ae' fill-opacity='0.4'/%3E%3Crect x='36' y='12' width='2' height='4' fill='%234fb8ae' fill-opacity='0.4'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: bottom left;
+  opacity: 0.7;
+  animation: waveform-scroll 6s linear infinite;
+}
+
+@keyframes waveform-scroll {
+  from { background-position: 0 bottom; }
+  to { background-position: -40px bottom; }
 }
 
 .section__head {
@@ -663,3 +702,109 @@ footer .tc { color: var(--line); }
   height: auto;
   display: block;
 }
+
+/* Hover glitch — brief RGB-shift/scanline sweep, evokes a signal glitch.
+   Applies to every media card site-wide (Work grid + all galleries). */
+.gallery-item,
+.work-card {
+  position: relative;
+}
+
+.gallery-item::before,
+.work-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(79, 184, 174, 0.35), transparent 60%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.gallery-item:hover::before,
+.work-card:hover::before {
+  opacity: 1;
+  animation: glitch-sweep 0.5s ease forwards;
+}
+
+.gallery-item:hover img,
+.gallery-item:hover video,
+.work-card:hover img,
+.work-card:hover video {
+  animation: glitch-shift 0.35s steps(2, end) 1;
+}
+
+@keyframes glitch-sweep {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
+}
+
+@keyframes glitch-shift {
+  0% { transform: translate(0, 0); filter: none; }
+  20% { transform: translate(-2px, 0); filter: hue-rotate(8deg); }
+  40% { transform: translate(2px, 0); filter: hue-rotate(-8deg); }
+  60% { transform: translate(-1px, 0); filter: none; }
+  100% { transform: translate(0, 0); filter: none; }
+}
+
+/* LIGHTBOX — full-screen viewer for gallery/work media */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  padding: 40px;
+}
+
+.lightbox[hidden] { display: none; }
+
+.lightbox__content {
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox__content img,
+.lightbox__content video {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.lightbox__content iframe {
+  border: 0;
+  border-radius: 4px;
+  width: min(80vw, 960px);
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.lightbox__close:hover { border-color: var(--amber); color: var(--amber); }
