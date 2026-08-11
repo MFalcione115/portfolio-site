@@ -13,6 +13,8 @@
 </head>
 <body>
 
+  <div class="render-bar" id="renderBar"></div>
+
   <nav class="timeline-nav" aria-label="Track 2 navigation">
     <div class="timeline-nav__inner">
       <a href="{{ '/' | relative_url }}" class="timeline-nav__brand">
@@ -37,5 +39,10 @@
   </footer>
 
   <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox__close" id="lightboxClose" aria-label="Close">&times;</button>
+    <div class="lightbox__content" id="lightboxContent"></div>
+  </div>
 </body>
 </html>
